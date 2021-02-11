@@ -1,0 +1,18 @@
+#include "images.h"  // must include the images.h file with program
+#include "heltec.h"
+#define BAND    915E6  //you can set band here directly,e.g. 868E6 (Europe),915E6 (North America)
+#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
+#define TIME_TO_SLEEP  30        /* Time ESP32 will go to sleep (in seconds) */
+
+void setup(){
+ 
+  digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
+  
+  Heltec.begin(true /*DisplayEnable Enable*/, true /*Heltec.Heltec.Heltec.LoRa Disable*/, true /*Serial Enable*/, true /*PABOOST Enable*/, BAND /*long BAND*/);
+
+  delay(1000);
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
+  esp_deep_sleep_start();
+  }
+void loop (){
+}
