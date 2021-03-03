@@ -1,0 +1,66 @@
+#include <TinyGPS++.h>
+#include <SoftwareSerial.h>
+#include <SPI.h>
+#include "heltec.h"
+
+// The serial connection to the GPS module
+SoftwareSerial ss(17, 2);
+#define tinyGPS
+//set the maximum distance that the project can go without raising the alarm
+//const float distance = ss.read();
+//declare two variables that will contain the initial location
+//float initialLatitude;
+//float initialLongitude;
+float Latitude;
+float Longitude;
+//const float maxDistance = initialLatitude+10,initialLongitude+10,initialLatitude-10,initialLongitude-10;
+
+void setup(){
+  //In the setup() function of the sketch, we get a GPS fix to set the initial location
+ // initialLatitude = 41.765200;             //type in your base coordinates
+  //initialLongitude = -87.977500;           //type in your base coordinates
+   Serial.begin(115200);
+  ss.begin(9600);
+}
+void printGPSInfo()
+{
+  // Print latitude, longitude, date, time
+  Serial.print("Lat: "); //Serial.println(tinyGPS.location.lat(), 6);
+  Serial.print("Long: "); //Serial.println(tinyGPS.location.lng(), 6);
+  Serial.print("Date: "); //printDate();  // function details below
+  Serial.print("Time: "); //printTime();  // function details below 
+  Serial.println();
+}
+void loop(){
+  
+  //get the byte data from the GPS
+    byte gpsData = ss.read();
+    Serial.write(gpsData);
+  // Establish geofence and set gps variable state
+  if (Latitude > 41.765513 && Latitude < 41.765565 && Longitude > -87.977100 && Longitude < -87.977168)
+  {
+           digitalWrite(LED, LOW); //inside the geofence
+        }
+  else
+  {
+         digitalWrite(LED, HIGH) ; //outside the geofence
+  }
+}
+  /*while (ss.available() != 0){
+    // get the byte data from the GPS
+    byte gpsData = ss.read();
+    Serial.write(gpsData);
+   // float distanceCoordinates;
+    /*In the loop() function of the sketch, we constantly get the current GPS location, 
+  and then calculate the difference between this & the initial location*
+  //float distance = distanceCoordinates(latitude, longitude, initialLatitude, initialLongitude);
+  //print this distance inside the Serial monitor
+  Serial.print("Distance: ");
+//  printFloat(distance, 6);
+  Serial.println("");
+  //Alarm is set if max distance is met
+    if (distance > maxDistance) {
+       digitalWrite(LED, HIGH);
+         }                     
+       }
+    }*/
