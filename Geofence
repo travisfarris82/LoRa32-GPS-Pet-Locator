@@ -1,8 +1,16 @@
-if(( Latitude > 41.765000 && Latitude < 41.765300) && (Longitude > -87.977800 && Longitude < -87.977200))
+////////////////////
+/*void loop() 
+digitalWrite(LED, HIGH); //must be included in loop
+  // sets safezone
+  geofence();
+*////////////////
 
-digitalWrite(LED, HIGH); // project is inside the geofence
-
-// else
-
-// digitalWrite(LED, LOW) ; // indicator that it is outside the geofence
-
+void geofence(){
+ Latitude = tinyGPS.location.lat();    
+ Longitude = tinyGPS.location.lng();
+ 
+    if(( Latitude > 41.765050 && Latitude < 41.765300) && (Longitude > -87.977800 && Longitude < -87.977200))
+        digitalWrite(LED, LOW); // project is outside the geofence
+ else
+         digitalWrite(LED, HIGH) ; // indicator that it is inside the geofence
+}
