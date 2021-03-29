@@ -9,7 +9,7 @@ void geofence(){
  Latitude = tinyGPS.location.lat();    
  Longitude = tinyGPS.location.lng();
  
-    if(( Latitude > 41.765050 && Latitude < 41.765300) && (Longitude > -87.977800 && Longitude < -87.977200))
+    if(( Latitude > **.****** && Latitude < **.******) && (Longitude > -**.****** && Longitude < -**.******))
         digitalWrite(LED, LOW); // project is outside the geofence
  else
          digitalWrite(LED, HIGH) ; // indicator that it is inside the geofence
